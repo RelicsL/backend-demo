@@ -16,13 +16,12 @@ router.get('/', function(req, res, next) {
   //读库
   //读库
   mg({
-    dbName:'1809',
-    collectionName:'topic2'
+    dbName:'project',
+    collectionName:'scenery'
   },(collection,client)=>{
     collection.find().toArray((err,data)=>{
       if(data.length>0){
         res.send(data)
-        // res.send(show(data))
       }else{
         res.send({error:1,msg:'数据为空'})
       }

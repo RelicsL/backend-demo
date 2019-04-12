@@ -20,6 +20,7 @@ router.get('/', function(req, res, next) {
   },(collection,client)=>{
     collection.find({name : req.query.name}).toArray((err,data)=>{
       if(data.length>0){
+        delete data[0].password;
         res.send(data);
       }else{
         res.send([]);

@@ -30,14 +30,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 //响应
+app.use('/learning/detail',require('./routes/learning'));
+app.use('/news/detail',require('./routes/news'));
 app.use('/learning',require('./routes/learning'));
+app.use('/news',require('./routes/news'));
 app.use('/register',require('./routes/register'));
 app.use('/search',require('./routes/search'));
 app.use('/login',require('./routes/login'));
-app.use('/goodslist',require('./routes/goodslist'));
-app.use('/topic1',require('./routes/topic1'));
-app.use('/topic2',require('./routes/topic2'));
-app.use('/hot',require('./routes/hot'));
+app.use('/scenery',require('./routes/scenery'));
 
 
 

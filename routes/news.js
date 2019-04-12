@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
   //读库
   mg({
     dbName:'project',
-    collectionName:'learning'
+    collectionName:'news'
   },(collection,client)=>{
     if(req.query.did !== undefined){
       collection.find({id : Number(req.query.did)}).toArray((err,data)=>{
