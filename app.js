@@ -7,6 +7,15 @@ var logger = require('morgan');
 
 var app = express();
 
+app.all('*', function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
+  res.header("X-Powered-By",' 3.2.1')
+  res.header("Content-Type", "application/json;charset=utf-8");
+  next();
+});
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -22,7 +31,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //响应
 app.use('/learning',require('./routes/learning'));
-app.use('/rank2',require('./routes/rank2'));
+app.use('/register',require('./routes/register'));
+app.use('/search',require('./routes/search'));
+app.use('/login',require('./routes/login'));
 app.use('/goodslist',require('./routes/goodslist'));
 app.use('/topic1',require('./routes/topic1'));
 app.use('/topic2',require('./routes/topic2'));

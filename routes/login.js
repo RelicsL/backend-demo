@@ -8,7 +8,6 @@ var mg = require('./mg');
 
 router.get('/', function(req, res, next) {
   
-  // console.log('news',req.query)
 
   // let start=req.query.start-0;
   // let count=req.query.count-0;
@@ -17,14 +16,17 @@ router.get('/', function(req, res, next) {
   //读库
   mg({
     dbName:'project',
-    collectionName:'learning'
+    collectionName:'user'
   },(collection,client)=>{
-    collection.find().toArray((err,data)=>{
-      if(data.length>0){
-        res.send(data)
-        // res.send(show(data))
+    collection.find({name : req.query.name}).toArray((err,data)=>{
+      if(data.length){
+        if(data[0].password == req.query.password){
+          res.send()
+        }else{
+          res.send({error:1,msg:'用户名或密码不正确！'})
+        }
       }else{
-        res.send({error:1,msg:'数据为空'})
+        res.send({error:1,msg:'用户名不存在'})
       }
     })
   })

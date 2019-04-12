@@ -8,7 +8,6 @@ var mg = require('./mg');
 
 router.get('/', function(req, res, next) {
   
-  // console.log('news',req.query)
 
   // let start=req.query.start-0;
   // let count=req.query.count-0;
@@ -16,15 +15,15 @@ router.get('/', function(req, res, next) {
   //读库
   //读库
   mg({
-    dbName:'1809',
-    collectionName:'rank1'
+    dbName:'project',
+    collectionName:'user'
   },(collection,client)=>{
-    collection.find().toArray((err,data)=>{
-      if(data.length>0){
-        res.send(data)
-        // res.send(show(data))
+    collection.find({name : req.query.name}).toArray((err,data)=>{
+      if(!data.length){
+        collection.insert(req.query);
+        res.send();
       }else{
-        res.send({error:1,msg:'数据为空'})
+        res.send({error:1,msg:'用户名已存在'})
       }
     })
   })
