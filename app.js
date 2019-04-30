@@ -4,7 +4,6 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-
 var app = express();
 
 app.all('*', function(req, res, next) {
@@ -20,14 +19,11 @@ app.all('*', function(req, res, next) {
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-
 
 //响应
 app.use('/learning/detail',require('./routes/learning'));
@@ -38,6 +34,7 @@ app.use('/register',require('./routes/register'));
 app.use('/search',require('./routes/search'));
 app.use('/login',require('./routes/login'));
 app.use('/scenery',require('./routes/scenery'));
+app.use('/forum',require('./routes/forum'));
 
 
 
