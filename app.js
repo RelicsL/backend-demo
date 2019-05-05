@@ -28,12 +28,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 //响应
 app.use('/learning/detail',require('./routes/learning'));
 app.use('/news/detail',require('./routes/news'));
+app.use('/forum/detail', require('./routes/forum'));
 app.use('/learning',require('./routes/learning'));
 app.use('/news',require('./routes/news'));
 app.use('/register',require('./routes/register'));
 app.use('/search',require('./routes/search'));
 app.use('/login',require('./routes/login'));
 app.use('/scenery',require('./routes/scenery'));
+app.use('/forum/comment/update',require('./routes/updateComment'));
+app.use('/forum/add',require('./routes/addForum'));
 app.use('/forum',require('./routes/forum'));
 
 
