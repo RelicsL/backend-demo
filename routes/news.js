@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mg = require('./mg');
+var objectId = require('mongodb').ObjectId;
 
 router.get('/', function(req, res, next) {
   mg({
@@ -8,7 +9,7 @@ router.get('/', function(req, res, next) {
     collectionName:'news'
   },(collection,client)=>{
     if(req.query.did !== undefined){
-      collection.find({id : Number(req.query.did)}).toArray((err,data)=>{
+      collection.find({ _id: objectId(req.query.did) }).toArray((err,data)=>{
         if(data.length>0){
           res.send(data)
         }else{
