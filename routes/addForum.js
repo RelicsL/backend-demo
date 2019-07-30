@@ -11,7 +11,7 @@ router.get('/', function (req, res, next) {
   }, (collection, client) => {
     collection.find().toArray((err, data) => { 
       collection.insert({ ...req.query, comments: [] });
-      res.send();
+      res.send({ ...req.query, comments: [] });
     })
   })
 

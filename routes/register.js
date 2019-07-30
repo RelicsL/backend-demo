@@ -11,9 +11,9 @@ router.get('/', function(req, res, next) {
     collection.find({name : req.query.name}).toArray((err,data)=>{
       if(!data.length){
         collection.insert(req.query);
-        res.send();
+        res.send({ ...req.query });
       }else{
-        res.send({error:1,msg:'用户名已存在'})
+        res.send({ error: 1, msg: '用户名已存在' });
       }
     })
   })

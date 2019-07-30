@@ -10,8 +10,8 @@ router.get('/', function (req, res, next) {
     dbName: 'project',
     collectionName: 'forum'
   }, (collection, client) => {
-      collection.find({ _id: objectId(req.query.did) }).toArray((err, data) => {
-        if (data.length > 0) {
+      try {
+        collection.find({ _id: objectId(req.query.did) }).toArray((err, data) => {
           if (req.query.index !== undefined) {
             data[0].comments.splice(req.query.index,1);
             collection.update({ _id: objectId(req.query.did) }, data[0]);
@@ -19,11 +19,11 @@ router.get('/', function (req, res, next) {
             data[0].comments.push(req.query);
             collection.update({ _id: objectId(req.query.did) }, data[0]);
           }
-          res.send();
-        } else {
-          res.send({ error: 1, msg: '数据为空' })
-        }
-      })
+          res.send({ _id: objectId(req.query.did) }, data[0]);
+        })
+      } catch (err) {
+        res.send({ error: 1, msg: '传参错误' })
+      }
     })
 });
 

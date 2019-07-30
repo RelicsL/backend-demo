@@ -10,20 +10,20 @@ router.get('/', function(req, res, next) {
     dbName:'project',
     collectionName:'learning'
   },(collection,client)=>{
-    if(req.query.did !== undefined){
-      collection.find({ _id: objectId(req.query.did) }).toArray((err,data)=>{
-        if(data.length>0){
-          res.send(data)
-        }else{
-          res.send({error:1,msg:'数据为空'})
+      if (req.query.did !== undefined) {
+        try {
+          collection.find({ _id: objectId(req.query.did) }).toArray((err,data)=>{
+            res.send(data);
+          })
+        } catch(err){
+          res.status(400).send({ error: 1, msg: '传参错误' });
         }
-      })
     }else{
       collection.find().toArray((err,data)=>{
-        if(data.length>0){
-          res.send(data)
+        if (data.length > 0) {
+          res.send(data);
         }else{
-          res.send({error:1,msg:'数据为空'})
+          res.send([]);
         }
       })
     }

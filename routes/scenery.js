@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
       if(data.length>0){
         res.send(data)
       }else{
-        res.send({error:1,msg:'数据为空'})
+        res.send([])
       }
     })
   })
